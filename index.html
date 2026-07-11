@@ -33,8 +33,13 @@ body {
 }
 
 #status, #status-splash {
-	top: 0;
-	bottom: 0;
+    position: fixed !important;
+    top: 0 !important;
+    bottom: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    height: 100vh !important;
+    width: 100vw !important;
 }
 
 #status {
@@ -227,4 +232,5 @@ const engine = new Engine(GODOT_CONFIG);
 		</script>
 	</body>
 </html>
+
 
