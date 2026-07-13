@@ -130,6 +130,39 @@ body {
 
 		<script src="index.js"></script>
 		<script>
+			// Ide mentjük el a böngésző telepítési eseményét
+			window.deferredPrompt = null;
+
+			window.addEventListener('beforeinstallprompt', (e) => {
+				// Megakadályozzuk, hogy a Chrome magától feldobja a sávot a legrosszabb pillanatban
+				e.preventDefault();
+				// Elmentjük az eseményt későbbre
+				window.deferredPrompt = e;
+				console.log("PWA telepítésre készen áll!");
+			});
+
+			// Ezt a függvényt fogjuk meghívni Godot-ból
+			function triggerPWAInstall() {
+				if (window.deferredPrompt) {
+					// Feldobjuk a böngésző saját telepítési ablakát
+					window.deferredPrompt.prompt();
+					
+					// Megvárjuk, mit lép a felhasználó
+					window.deferredPrompt.userChoice.then((choiceResult) => {
+						if (choiceResult.outcome === 'accepted') {
+							console.log('A felhasználó telepítette a játékot.');
+						} else {
+							console.log('A felhasználó elutasította a telepítést.');
+						}
+						// Kiürítjük, mert csak egyszer használható fel
+						window.deferredPrompt = null;
+					});
+				} else {
+					console.log("A PWA még nem telepíthető (lehet, hogy már telepítve van, vagy nem felel meg a feltételeknek).");
+				}
+			}
+			</script>
+		<script>
 const GODOT_CONFIG = {"args":[],"canvasResizePolicy":2,"emscriptenPoolSize":8,"ensureCrossOriginIsolationHeaders":true,"executable":"index","experimentalVK":true,"fileSizes":{"index.pck":11175436,"index.wasm":37695054},"focusCanvas":true,"gdextensionLibs":[],"godotPoolSize":4,"serviceWorker":"index.service.worker.js"};
 const GODOT_THREADS_ENABLED = false;
 const engine = new Engine(GODOT_CONFIG);
