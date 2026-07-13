@@ -4,11 +4,7 @@
 // Incrementing CACHE_VERSION will kick off the install event and force
 // previously cached resources to be updated from the network.
 /** @type {string} */
-<<<<<<< Updated upstream
-const CACHE_VERSION = '1783880807|7084270577';
-=======
-const CACHE_VERSION = '1783928944|8943883535';
->>>>>>> Stashed changes
+const CACHE_VERSION = '1783929010|9010611856';
 /** @type {string} */
 const CACHE_PREFIX = 'VakKaland-sw-cache-';
 const CACHE_NAME = CACHE_PREFIX + CACHE_VERSION;
